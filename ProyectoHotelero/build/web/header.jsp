@@ -48,6 +48,17 @@
             <li><a href="cerrarsesion.jsp" title="Salir">Salir</a></li>
         </ul>
     </div>
+    <% } else {%>
+
+    <div class="header-content">
+        <ul class="nav nav-pills">
+            <li><a href="index.jsp" title="Home">Home</a></li>
+            <li><a href="informacion.jsp" title="Acerca de Nosotros">Hotel</a></li>
+            <li><a href="reservar.jsp" title="Reservaciones">Reservar</a></li>
+            <li><a href="login.jsp" title="Entrar">Iniciar Sesión</a></li>
+            <li><a href="registrarse.jsp" title="Registrarse">Registrarse</a></li>
+        </ul>
+    </div>
     <% }%>
 </header>
 

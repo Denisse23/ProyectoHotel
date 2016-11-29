@@ -15,6 +15,7 @@
     <body>
         <jsp:include page="header.jsp"/>
         <div class="revs">
+            
             <form  method="POST">
                 <table class="table table-striped">
                     <thead >
@@ -43,7 +44,6 @@
                                     <option>Rechazada</option>
                                     <option>Cancelada</option>
                                     <option>Checkin</option>
-                                    <option>Checkout</option>
                                 </select></td>
                         </tr>
                     </tbody>

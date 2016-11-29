@@ -25,6 +25,8 @@
                     <input type="text" class="form-control" >
                      <label >Segundo Apellido:</label>
                     <input type="text" class="form-control" >
+                    <label >Rol:</label>
+                    <input type="text" class="form-control" >
                     <br>
                     <input type="submit" class="btn btn-primary" value="Registrar" />
                 </div>

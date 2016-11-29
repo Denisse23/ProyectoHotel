@@ -42,7 +42,7 @@
                         </ul>
                     </div>
                 </div>
-                
+                <% if(session.getAttribute("Rol")!=null){ %>
                  <div class="row">
                     <div class="col-md-6">
                         <input type="button" value="Realizar búsqueda" class="btn btn-primary"/>
@@ -128,6 +128,7 @@
                         <input type="submit" value="Aceptar" class="btn btn-primary"/>
                     </div>
                 </div>
+                <% } %>
             </form>
         </div>
         <jsp:include page="footer.jsp"/>
