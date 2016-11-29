@@ -1,0 +1,27 @@
+.reservar-img{
+    margin: 0 auto;
+    width: 70%;
+    padding-top: 15%;
+    z-index: -1;
+    position: relative;
+    height: 840px;
+}
+
+img{
+    width: 100%;
+}
+
+.reservar{
+    
+    margin: 0 auto;
+    margin-top: 0px;
+    width: 70%;
+    padding-bottom: 3%;
+}
+
+.btn{
+     background-color: #2A2F34;
+} 
+
+
+

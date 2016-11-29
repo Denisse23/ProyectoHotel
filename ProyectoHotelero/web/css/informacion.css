@@ -1,0 +1,27 @@
+.info{
+    margin: 0 auto;
+    width: 40%;
+    padding-top: 15%;
+    font-size: 16px;
+    font-family: 'Open Sans';
+    font-style: inherit;
+    font-weight: 100;
+    z-index: -1; 
+    position:relative;
+}
+
+.row{
+    margin-top: 3%;
+}
+
+h3{
+    color: #91700B;
+}
+
+.iz{
+    font-size: 17px;
+    font-weight: bold;
+    color: #2A2F34;
+}
+
+

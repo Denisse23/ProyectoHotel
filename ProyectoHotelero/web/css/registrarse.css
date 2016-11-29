@@ -1,0 +1,15 @@
+.registro{
+    margin-left: 15%;
+    margin: 0 auto;
+    width: 70%;
+    padding-top: 15%;
+    padding-left: 15%;
+}
+
+
+.btn{
+    margin-left: 15%;
+    width: 35%;
+    background-color: #2A2F34;
+    color: white;
+}
