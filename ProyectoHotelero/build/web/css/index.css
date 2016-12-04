@@ -4,5 +4,7 @@ img{
 
 
 .slides{
-    padding-top: 8%;
+    padding-top: 13%;
+    z-index: -1;
+    position: relative;
 }

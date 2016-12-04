@@ -3,7 +3,11 @@
     Created on : 29/11/2016, 11:59:11 AM
     Author     : Denisse
 --%>
-
+<%
+   if(session.getAttribute("Rol")==null || !session.getAttribute("Rol").equals("Administrador")){
+       out.write("<script>window.location.href='"+application.getContextPath()+"/index.jsp';</script>");
+   }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

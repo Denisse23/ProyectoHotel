@@ -1,0 +1,5 @@
+<img alt="imagen" width="600px" src="/ProyectoHotelero/images/hotel/entrada.jpg" style="border:white solid 5px;"/>
+<img alt="imagen" width="600px" src="/ProyectoHotelero/images/hotel/restaurante.jpg" style="border:white solid 5px;"/>
+<img alt="imagen" width="600px" src="/ProyectoHotelero/images/hotel/lobby.jpg" style="border:white solid 5px;"/>
+<img alt="imagen" width="600px" src="/ProyectoHotelero/images/hotel/piscina.jpg" style="border:white solid 5px;"/>
+<img alt="imagen" width="600px" src="/ProyectoHotelero/images/hotel/habitaciones.jpg" style="border:white solid 5px;"/>

@@ -1,11 +1,12 @@
 .adinfo{
     margin: 0 auto;
-    width: 70%;
+    width: 80%;
     padding-top: 15%;
+    padding-bottom: 8%;
 }
 
 
-.btn{
+.btn-primary{
     width: 50%;
     background-color: #2A2F34;
     color: white;
@@ -15,3 +16,42 @@
     margin: 0 auto;
     width: 100%;
 }
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+
+p{
+    font-weight: bold;
+}
+
+#div-nuevo-activo{
+    width: 30%;
+}
+
+#div-modificar-activo{
+    width: 30%;
+}
+
+#div-hotel-informacion{
+    float: left;
+    width: 40%;
+}
+
+#div-hotel-informacion-imagenes{
+    float: left;
+    margin-left: 20%;
+    margin-top: 20%;
+    width: 40%;
+}
+span{
+    color:red;
+    font-size: 12px;
+}
+
