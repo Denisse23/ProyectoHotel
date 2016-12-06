@@ -1,0 +1,2 @@
+<img alt="imagen" width="600px" src="/ProyectoHotelero/images/Normal/normal1.jpg" style="border:white solid 5px;"/>
+<img alt="imagen" width="600px" src="/ProyectoHotelero/images/Normal/normal2.jpg" style="border:white solid 5px;"/>

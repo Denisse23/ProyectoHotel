@@ -1,6 +1,3 @@
-img{
-    width: 100%;
-}
 
 .reservar{
     margin: 0 auto;
@@ -8,16 +5,20 @@ img{
     padding-top: 15%;
     padding-bottom: 3%;
 }
-.division{
-    
-     table-layout: fixed;
+
+.requerimientos{
+    float: left;
+    width: 40%;
+    padding-bottom: 10%;
 }
 
-.division td{
-    width: 50%;
-}
-.Info{
-    padding-right: 10%;
+.caracteristicas-fotos{
+    float: left;
+    margin-left:  5%;
+    width: 45%;
+    padding-bottom: 10%;
+    z-index: -1;
+    position: relative;
 }
 
 
@@ -25,5 +26,9 @@ img{
     background-color: #2A2F34;
 } 
 
+span{
+    color:red;
+    font-size: 12px;
+}
 
 

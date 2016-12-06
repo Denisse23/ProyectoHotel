@@ -1,6 +1,6 @@
 .adinfo{
     margin: 0 auto;
-    width: 80%;
+    width: 90%;
     padding-top: 15%;
     padding-bottom: 8%;
 }
@@ -38,6 +38,25 @@ p{
 #div-modificar-activo{
     width: 30%;
 }
+
+#div-nuevo-servicio{
+    width: 30%;
+}
+
+#div-modificar-servicio{
+    width: 30%;
+}
+#div-nuevo-categoria{
+    width: 30%;
+}
+
+#div-modificar-categoria{
+    width: 30%;
+}
+#div-nuevo-habitacion{
+    width: 30%;
+}
+
 
 #div-hotel-informacion{
     float: left;

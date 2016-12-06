@@ -13,8 +13,15 @@
 <%
     if (request.getParameter("user") != null) {
         session.setAttribute("Rol", request.getParameter("user").toString());
+        if(request.getParameter("user").equals("Administrador")){
+            session.setAttribute("Id-Usuario", 2);
+            session.setAttribute("Usuario", "useradmin");
+        }else{
+            session.setAttribute("Id-Usuario", 3);
+            session.setAttribute("Usuario", "primeruser");
+        }
     }
-    session.setAttribute("Usuario", "ad");
+    
 %>
 <html>
     <jsp:include page="head.jsp"/>

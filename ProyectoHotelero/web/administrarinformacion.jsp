@@ -53,7 +53,7 @@
                                     <p>Modificar Activo</p>
                                     <form method="POST" id="form-modificar-activo" action="<%= application.getContextPath()+"/backjsp/modificaractivo.jsp"%>">
                                     <div class="form-group">
-                                        <label >IdActivo:</label>
+                                        <label >Id Activo:</label>
                                         <input id="text-id-modificar-activo" name="text-id-modificar-activo",type="text" class="form-control" readonly>
                                         <label >Nombre:</label>
                                         <input id="text-nombre-modificar-activo" name="text-nombre-modificar-activo",type="text" class="form-control" ><span id="span-nombre-modificar-activo"></span>
@@ -71,7 +71,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>IdActivo</th>
+                                            <th>Id Activo</th>
                                             <th>Nombre</th>
                                             <th>Cantidad disponible</th>
                                             <th>Cantidad en uso</th>
@@ -126,7 +126,101 @@
                             </h4>
                         </div>
                         <div id="collapse2" class="panel-collapse collapse">
-                            <div class="panel-body">.............</div>
+                            <div class="panel-body">
+                                 <div id="div-nuevo-categoria">
+                                    <p>Nueva Categoría</p>
+                                    <form method="POST" id="form-nuevo-categoria" action="<%= application.getContextPath()+"/backjsp/agregarcategoria.jsp"%>">
+                                    <div class="form-group">
+                                        <label >Nombre:</label>
+                                        <input id="text-nombre-nuevo-categoria" name="text-nombre-nuevo-categoria",type="text" class="form-control" ><span id="span-nombre-nuevo-categoria"></span>
+                                        <label >Precio:</label>
+                                        <input id="text-precio-nuevo-categoria" name="text-precio-nuevo-categoria" type="textber" min="1" class="form-control"/><span id="span-precio-nuevo-categoria"></span>
+                                        <br>
+                                        <input id="button-agregar-categoria"  type="button" class="btn btn-primary" value="Agregar" />
+                                    </div>
+                                    </form>
+                                    <br>
+                                </div>
+                                <div id="div-modificar-categoria">
+                                    <p>Modificar Categoría</p>
+                                    <form method="POST" id="form-modificar-categoria" action="<%= application.getContextPath()+"/backjsp/modificarcategoria.jsp"%>">
+                                    <div class="form-group">
+                                        <label >Id Categoría:</label>
+                                        <input id="text-id-modificar-categoria" name="text-id-modificar-categoria",type="text" class="form-control" readonly>
+                                        <label >Nombre:</label>
+                                        <input id="text-nombre-modificar-categoria" name="text-nombre-modificar-categoria",type="text" class="form-control" ><span id="span-nombre-modificar-categoria"></span>
+                                        <label >Precio:</label>
+                                        <input id="text-precio-modificar-categoria" name="text-precio-modificar-categoria" type="textber" min="0" class="form-control"/><span id="span-precio-modificar-categoria"></span>
+                                        <br>
+                                        <input id="button-modificar-categoria"  type="button" class="btn btn-primary" value="Modificar" />
+                                    </div>
+                                    </form>
+                                    <br>
+                                </div>
+                                 <button id="button-nuevo-categoria" name="button-nuevo-categoria" type="button" class="btn btn-success btn-circle">+</button>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Id Categoría</th>
+                                            <th>Nombre</th>
+                                            <th>Precio</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%
+                                            try {
+                                                Dba db = new Dba(application.getRealPath("Hotel.mdb"));
+                                                db.conectar();
+                                                String sql ="select IdCategoria, Nombre, Precio from Categoria";
+                                                db.prepare(sql);
+                                                db.query.execute();
+                                                ResultSet rs = db.query.getResultSet();
+                                                while (rs.next()) {
+
+                                        %>
+                                        <tr > 
+                                            <td><%=rs.getString(1)%></td> 
+                                            <td><%=rs.getString(2)%></td> 
+                                             <td><%=rs.getString(3)%></td>
+                                     
+                                     
+                                              <td><button type="button" class="btn btn-primary btn-circle" onclick="modificarCategoria(<%= rs.getString(1) %>,'<%= rs.getString(2) %>',<%= rs.getString(3) %>)" >M</button></td>
+                                            <td> <form method="POST" action="<%= application.getContextPath()+"/backjsp/eliminarcategoria.jsp"%>">
+                                                    <input name="text-id-eliminar-categoria" type="text" value="<%=rs.getString(1)%>" style="display: none;">
+                                                    <button type="submit" class="btn btn-danger btn-circle" >X</button>
+                                             </form></td>
+                                             <td><form method="POST" action="<%= application.getContextPath()+"/categoriaactivo.jsp"%>">
+                                                <input name="text-id-categoria-activo" type="text" value="<%=rs.getString(1)%>" style="display: none;">
+                                                <button type="submit" class="btn btn-primary"  >Condiciones</button>
+                                              </form></td>
+                                              <td><form method="POST" action="<%= application.getContextPath()+"/categoriaservicio.jsp"%>">
+                                              <input name="text-id-categoria-servicio" type="text" value="<%=rs.getString(1)%>" style="display: none;">
+                                                <button type="submit" class="btn btn-primary"  >Servicios</button>
+                                              </form></td>
+                                          <td>  <form method="POST" action="<%= application.getContextPath()+"/imagenescategoria.jsp"%>">
+                                            <input name="text-nombre-categoria-imagen" type="text" value="<%=rs.getString(2)%>" style="display: none;">
+                                            <input type="submit" value="Imágenes" class="btn btn-primary"/>
+                                        </form></td>
+                                             
+                                            
+                                            
+                                        </tr>         
+                                                
+                                        <%
+                                                }
+                                                db.desconectar();
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        %> 
+                                    </tbody>
+                                </table>
+
+                            </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
@@ -136,7 +230,86 @@
                             </h4>
                         </div>
                         <div id="collapse3" class="panel-collapse collapse">
-                            <div class="panel-body">.............</div>
+                            <div class="panel-body">
+                            <div id="div-nuevo-habitacion">
+    <p>Nueva Habitacion</p>
+    <form method="POST" id="form-nuevo-habitacion" action="<%= application.getContextPath() + "/backjsp/agregarhabitacion.jsp"%>">
+        <div class="form-group">
+            <label >Id Habitación:</label>
+            <input id="text-id-nuevo-habitacion" name="text-id-nuevo-habitacion" type="text" class="form-control" ><span id="span-id-nuevo-habitacion"></span>
+            <label >Categoría:</label>
+            <select name="select-id-agregar-categoria" class="selectpicker form-control">
+                <%
+                    try {
+                        Dba db = new Dba(application.getRealPath("Hotel.mdb"));
+                        db.conectar();
+                        String sql = "select IdCategoria, Nombre from Categoria ";
+                        db.prepare(sql);
+                        db.query.execute();
+                        ResultSet rs = db.query.getResultSet();
+                        while (rs.next()) {
+
+                %>
+                <option value="<%= rs.getString(1)%>"><%= rs.getString(2)%></option>
+                <%
+                        }
+                        db.desconectar();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                %> 
+            </select>
+            <br>
+            <input id="button-agregar-habitacion"  type="button" class="btn btn-primary" value="Agregar" />
+        </div>
+    </form>
+    <br>
+</div>
+<button id="button-nuevo-habitacion" name="button-nuevo-habitacion" type="button" class="btn btn-success btn-circle">+</button>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id Habitacion</th>
+            <th>Nombre Categoría</th>
+            <th>Precio</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <%
+            try {
+                Dba db = new Dba(application.getRealPath("Hotel.mdb"));
+                db.conectar();
+                String sql = "select IdHabitacion,IdCategoria, Nombre, Precio from Habitacion join Categoria on Habitacion.IdCategoria="
+                        + "Categoria.IdCategoria where Habitacion.Habilitada=1";
+                db.prepare(sql);
+                db.query.execute();
+                ResultSet rs = db.query.getResultSet();
+                while (rs.next()) {
+
+        %>
+        <tr > 
+            <td><%=rs.getString(1)%></td>  
+            <td><%=rs.getString(3)%></td> 
+            <td><%=rs.getString(4)%></td>
+            <td> <form method="POST" action="<%= application.getContextPath() + "/backjsp/eliminarhabitacion.jsp"%>">
+                    <input name="text-id-eliminar-habitacion" type="text" value="<%=rs.getString(1)%>" style="display: none;">
+                    <input name="text-categoria-eliminar-habitacion" type="text" value="<%=rs.getString(2)%>" style="display: none;">
+                    <button type="submit" class="btn btn-danger btn-circle" >X</button>
+                </form></td>
+
+        </tr>         
+
+        <%
+                }
+                db.desconectar();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        %> 
+    </tbody>
+</table>
+                            </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
@@ -146,7 +319,85 @@
                             </h4>
                         </div>
                         <div id="collapse4" class="panel-collapse collapse">
-                            <div class="panel-body">.............</div>
+                            <div class="panel-body">
+                            <div id="div-nuevo-servicio">
+                                    <p>Nuevo Servicio</p>
+                                    <form method="POST" id="form-nuevo-servicio" action="<%= application.getContextPath()+"/backjsp/agregarservicio.jsp"%>">
+                                    <div class="form-group">
+                                        <label >Nombre:</label>
+                                        <input id="text-nombre-nuevo-servicio" name="text-nombre-nuevo-servicio",type="text" class="form-control" ><span id="span-nombre-nuevo-servicio"></span>
+                                        <label >Precio:</label>
+                                        <input id="text-precio-nuevo-servicio" name="text-precio-nuevo-servicio" type="textber" min="1" class="form-control"/><span id="span-precio-nuevo-servicio"></span>
+                                        <br>
+                                        <input id="button-agregar-servicio"  type="button" class="btn btn-primary" value="Agregar" />
+                                    </div>
+                                    </form>
+                                    <br>
+                                </div>
+                                <div id="div-modificar-servicio">
+                                    <p>Modificar Servicio</p>
+                                    <form method="POST" id="form-modificar-servicio" action="<%= application.getContextPath()+"/backjsp/modificarservicio.jsp"%>">
+                                    <div class="form-group">
+                                        <label >Id Servicio:</label>
+                                        <input id="text-id-modificar-servicio" name="text-id-modificar-servicio",type="text" class="form-control" readonly>
+                                        <label >Nombre:</label>
+                                        <input id="text-nombre-modificar-servicio" name="text-nombre-modificar-servicio",type="text" class="form-control" ><span id="span-nombre-modificar-servicio"></span>
+                                        <label >Precio:</label>
+                                        <input id="text-precio-modificar-servicio" name="text-precio-modificar-servicio" type="textber" min="0" class="form-control"/><span id="span-precio-modificar-servicio"></span>
+                                        <br>
+                                        <input id="button-modificar-servicio"  type="button" class="btn btn-primary" value="Modificar" />
+                                    </div>
+                                    </form>
+                                    <br>
+                                </div>
+                                 <button id="button-nuevo-servicio" name="button-nuevo-servicio" type="button" class="btn btn-success btn-circle">+</button>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Id Servicio</th>
+                                            <th>Nombre</th>
+                                            <th>Precio</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%
+                                            try {
+                                                Dba db = new Dba(application.getRealPath("Hotel.mdb"));
+                                                db.conectar();
+                                                String sql ="select IdServicio, Nombre, Precio "
+                                                        + "from Servicio";
+                                                db.prepare(sql);
+                                                db.query.execute();
+                                                ResultSet rs = db.query.getResultSet();
+                                                while (rs.next()) {
+
+                                        %>
+                                        <tr > 
+                                            <td><%=rs.getString(1)%></td> 
+                                            <td><%=rs.getString(2)%></td> 
+                                             <td><%=rs.getString(3)%></td>
+                                            <td><button type="button" class="btn btn-primary btn-circle" onclick="modificarServicio(<%= rs.getString(1) %>,'<%= rs.getString(2) %>',<%= rs.getString(3) %>)" >M</button></td>
+                                                <form method="POST" action="<%= application.getContextPath()+"/backjsp/eliminarservicio.jsp"%>">
+                                                    <input name="text-id-eliminar-servicio" type="text" value="<%=rs.getString(1)%>" style="display: none;">
+                                                    <td><button type="submit" class="btn btn-danger btn-circle" >X</button></td>
+                                                </form>
+                                         
+                                            
+                                        </tr>         
+                                                
+                                        <%
+                                                }
+                                                db.desconectar();
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        %> 
+                                    </tbody>
+                                </table>
+
+                        </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
