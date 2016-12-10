@@ -1,4 +1,4 @@
-$(function () {
+﻿$(function () {
 
     $("#button-realizar-busqueda").click(function () {
         var conterrors = 0;
@@ -20,26 +20,24 @@ $(function () {
         }
     });
     
-   
-
     $("#button-reserva-clientes-aceptar").click(function () {
-       var values = $('#list-habitaciones-agregadas li').map(function () {
-                return $(this).attr("value");
-            });
-            for (var i = 0; i < values.length; i++) {
-                if (i === 0)
-                    $("#textarea-habitaciones-list").append(values[i]);
-                else
-                    $("#textarea-habitaciones-list").append("," + values[i]);
-            }
-            if(values.length>0)
+        var values = $('#list-habitaciones-agregadas li').map(function () {
+        return $(this).attr("value");
+    });
+    for (var i = 0; i < values.length; i++) {
+        if (i === 0)
+            $("#textarea-habitaciones-list").append(values[i]);
+        else
+            $("#textarea-habitaciones-list").append("," + values[i]);
+        
+      }
+        
+        if(values.length>0)
             $("#form-reserva-clientes-aceptar").submit();
             else
                 alert("No se agregaron habitaciones a la reservación");
+        
     });
-    
-
-
 
 });
 
@@ -79,7 +77,19 @@ function agregarHabitacion(id) {
 }
 
 function changeCategoria() {
+    var values = $('#list-habitaciones-agregadas li').map(function () {
+        return $(this).attr("value");
+    });
+    for (var i = 0; i < values.length; i++) {
+        if (i === 0)
+            $("#textarea-habitaciones-list-at").append(values[i]);
+        else
+            $("#textarea-habitaciones-list-at").append("," + values[i]);
+        
+      
+            
+        
+    }
     $('#form-categoria-reservar').submit();
 
 }
-

@@ -1,0 +1,14 @@
+.factura{
+    margin: 0 auto;
+    width:45%;
+    padding-top: 15%;
+    padding-bottom: 8%;
+}
+
+.btn-primary{
+    margin-left: 25%;
+    width: 50%;
+    background-color: #2A2F34;
+    color: white;
+}
+

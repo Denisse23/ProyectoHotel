@@ -15,6 +15,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="database.Dba"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <jsp:include page="../head.jsp"/>

@@ -1,4 +1,4 @@
-<%-- 
+﻿<%-- 
     Document   : reservar
     Created on : 28/11/2016, 09:38:07 PM
     Author     : Denisse
@@ -37,7 +37,7 @@
                                         try {
                                             Dba db = new Dba(application.getRealPath("Hotel.mdb"));
                                             db.conectar();
-                                            String sql = "select IdCategoria, Nombre, Precio from Categoria ";
+                                            String sql = "select IdCategoria, Nombre from Categoria ";
                                             db.prepare(sql);
                                             db.query.execute();
                                             ResultSet rs = db.query.getResultSet();
@@ -47,12 +47,14 @@
                                     <% if(request.getParameter("select-categoria-reservar")!=null){ 
                                         if(rs.getString(1).equals(request.getParameter("select-categoria-reservar"))){
                                     %>
-                                        <option value="<%=rs.getString(1)%>" selected="selected"><%=rs.getString(2)+" , precio:"+rs.getString(3)%></option> 
+                                        <option value="<%=rs.getString(1)%>" selected="selected"><%=rs.getString(2)%></option> 
                                      <%}else{%>
-                                          <option value="<%=rs.getString(1)%>" ><%=rs.getString(2)+" , precio:"+rs.getString(3)%></option>
+                                          <option value="<%=rs.getString(1)%>" ><%=rs.getString(2)%></option>
                                      <%}%>
+                                        
+                                        
                                     <%}else{ %>
-                                        <option value="<%=rs.getString(1)%>" ><%=rs.getString(2)+" , precio:"+rs.getString(3)%></option>
+                                        <option value="<%=rs.getString(1)%>" ><%=rs.getString(2)%></option>
                                     <% }%>
                                     <%   }
                                             db.desconectar();
@@ -61,6 +63,17 @@
                                         }
                                     %> 
                                 </select>
+                                <% 
+                                    if(request.getParameter("date-fecha-llegada")!=null){ %>
+                                        <input type="date"  name="date-fecha-llegada" value="<%=request.getParameter("date-fecha-llegada")%>" style="display: none;" >
+                                    <%  } %>
+                                        
+                                 <%   if(request.getParameter("date-fecha-salida")!=null){ %>
+                                 <input type="date" name="date-fecha-salida" value="<%=request.getParameter("date-fecha-salida")%>" style="display: none;" >
+                                 <input name="text-activar-div-habitaciones" type="text" value="SI" style="display: none;">
+                                <% }%>
+                                 <textarea name="textarea-habitaciones-list-at" id="textarea-habitaciones-list-at" style="display: none;"></textarea>  
+                                 
                             </form>
                                 <br>
                                 <% if (session.getAttribute("Rol") != null) { %>
@@ -173,7 +186,11 @@
                                 Habitaciones agregadas:
                                 <br>
                                 <ul class="list-group" id="list-habitaciones-agregadas" name="list-habitaciones-agregadas">
-                                
+                                <% if(request.getParameter("textarea-habitaciones-list-at")!=null){   
+                                    String[] habitaciones = request.getParameter("textarea-habitaciones-list-at").split(",");
+                                    for(String h: habitaciones){%>
+                                          <li class="list-group-item" value="<%=h%>"><%=h%></li>
+                                 <% }}%>
                                 </ul>
                                  <textarea name="textarea-habitaciones-list" id="textarea-habitaciones-list" style="display: none;"></textarea>    
                                  <input name="text-fecha-llegada-reserva" type="text" value="<%=request.getParameter("date-fecha-llegada")%>" style="display: none;">
@@ -197,17 +214,19 @@
                                 <ul class="list">
                                 <% String Cate="";
                                    int idCate=0;
+                                   String precio ="";
                                     try {
 
                                         Dba db = new Dba(application.getRealPath("Hotel.mdb"));
                                             db.conectar();
-                                            String sql1 = "select IdCategoria, Nombre from Categoria limit 1";
+                                            String sql1 = "select IdCategoria, Nombre, Precio from Categoria limit 1";
                                             db.prepare(sql1);
                                             db.query.execute();
                                             ResultSet rs1 = db.query.getResultSet();
                                             while (rs1.next()) {
                                                 Cate = rs1.getString(2);
                                                 idCate = rs1.getInt(1);
+                                                precio = rs1.getString(3);
                                             }
                                             db.desconectar();
                                     }catch(Exception e){}
@@ -215,12 +234,14 @@
                                     try {
                                             Dba db = new Dba(application.getRealPath("Hotel.mdb"));
                                             db.conectar();
-                                            String sql1 = "select Nombre from Categoria where IdCategoria="+request.getParameter("select-categoria-reservar");
+                                            String sql1 = "select Nombre,Precio from Categoria where IdCategoria="+request.getParameter("select-categoria-reservar");
                                             db.prepare(sql1);
                                             db.query.execute();
                                             ResultSet rs1 = db.query.getResultSet();
                                             while (rs1.next()) {
-                                                Cate = rs1.getString(1);
+                                                Cate = rs1.getString(1);%>
+                                                 <li>Precio habitación: <%=rs1.getString(2) %></li>
+                                                <%
                                             }
                                             String sql = "select Nombre, Cantidad from  CategoriaCondiciones join"
                                                     + " Activos on CategoriaCondiciones.idActivo=Activos.IdActivo"
@@ -232,11 +253,14 @@
                                             while (rs.next()) {
                                 %>
                                      <li><%=rs.getString(2)+" "+rs.getString(1) %></li>
-                                <% }
+                                <% } db.desconectar();
                                     }catch(Exception e){
 
                                    }
-                                    }else{
+                                    }else{%>
+                                        
+                                        <li>Precio habitación: <%=precio %></li>
+                                <%
                                         try {
 
                                         Dba db = new Dba(application.getRealPath("Hotel.mdb"));
@@ -250,9 +274,45 @@
                                             while (rs.next()) {
                                       %>
                                           <li><%=rs.getString(2)+" "+rs.getString(1) %></li>
-                                <%}}catch(Exception e){}}%>
+                                <%}db.desconectar();}catch(Exception e){}}%>
                                 </ul>
                             </div>
+                 <div class="panel panel-default">
+                 <label>Promociones y descuentos en las reservaciones de hoy:</label>
+                 <ul class="list">
+                 <%
+                    String idCategoriaPromocion="";
+                    if(request.getParameter("select-categoria-reservar")!=null){ 
+                        idCategoriaPromocion=request.getParameter("select-categoria-reservar");
+                    }else{
+                        idCategoriaPromocion=idCate+"";
+                    }
+                    try{
+                    Dba db = new Dba(application.getRealPath("Hotel.mdb"));
+                    db.conectar();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+                    Date todaypromocion = new Date();
+                    String sql = "select Tipo,Porcentaje from CategoriaDescuentoPromocion"
+                            + " where IdCategoria="+idCategoriaPromocion+" and FechaInicio<='"
+                            + format.format(todaypromocion)+"' and FechaFin>='"+format.format(todaypromocion)+"'";
+                    db.prepare(sql);
+                    db.query.execute();
+                    ResultSet rs = db.query.getResultSet();
+                    String tipop="Promoción";
+                    while (rs.next()) {
+                        if(rs.getInt(1)==1)
+                            tipop="Descuento";
+                    %>
+                        <li><%="Tipo:"+tipop+", "+rs.getString(2)+"% menos en el precio de la habitación" %></li>
+                    <%}
+                    db.desconectar();
+                    }catch(Exception e){
+                        out.print("<script>alert('"+e.toString()+"');</script>");
+                    }
+                   
+                 %>
+                 </ul>
+                 </div>
                  <div id="myCarousel" class="carousel slide" data-ride="carousel">
                  <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
@@ -288,4 +348,5 @@
         <jsp:include page="footer.jsp"/>
     </body>
 </html>
+
 

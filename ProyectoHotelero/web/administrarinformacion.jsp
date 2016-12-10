@@ -408,7 +408,92 @@
                         </div>
                         <div id="collapse5" class="panel-collapse collapse">
                             <div class="panel-body">
+                            <div id="div-nuevo-promocion">
+                                    <p>Nuevo Promocion</p>
+                                    <form method="POST" id="form-nuevo-promocion" action="<%= application.getContextPath()+"/backjsp/agregarpromocion.jsp"%>">
+                                    <div class="form-group">
+                                        <label >Categoría:</label>
+                                        <select name="select-id-categoria-agregar-promocion" class="selectpicker form-control">
+                                        <%
+                                            try {
+                                                Dba db = new Dba(application.getRealPath("Hotel.mdb"));
+                                                db.conectar();
+                                                String sql ="select IdCategoria, Nombre from Categoria";
+                                                db.prepare(sql);
+                                                db.query.execute();
+                                                ResultSet rs = db.query.getResultSet();
+                                                while (rs.next()) {
 
+                                        %>
+                                            <option value="<%= rs.getString(1)%>"><%= rs.getString(2)%></option>
+                                        <%
+                                            }db.desconectar();
+                                            }catch(Exception e){}
+                                        %>
+                                        </select>
+                                         <label >Tipo:</label>
+                                         <select name="select-tipo-agregar-promocion" class="selectpicker form-control">
+                                         <option value="0">Promocion</option>
+                                          <option value="1">Descuento</option>
+                                         </select>
+                                         <label >Pocentaje:</label>
+                                         <input id="text-porcentaje-agregar-promocion" name="text-porcentaje-agregar-promocion",type="text" class="form-control" placeholder="99.99"><span id="span-porcentaje-agregar-promocion"></span>
+                                         <label >Fecha Inicio:</label>
+                                         <input type="date" class="form-control" id="date-fecha-inicio-promocion" name="date-fecha-inicio-promocion"  ><span id="span-fecha-inicio-promocion"></span>
+                                         <label >Fecha Fin:</label>
+                                         <input type="date" class="form-control" id="date-fecha-fin-promocion" name="date-fecha-fin-promocion"  ><span id="span-fecha-fin-promocion"></span>
+                                        <br>
+                                        <input id="button-agregar-promocion"  type="button" class="btn btn-primary" value="Agregar" />
+                                    </div>
+                                    </form>
+                                    <br>
+                                </div>
+                            <button id="button-nuevo-promocion" name="button-nuevo-promocion" type="button" class="btn btn-success btn-circle">+</button>
+                                    <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Categoria</th>
+                                            <th>Tipo</th>
+                                            <th>Porcentaje</th>
+                                            <th>Fecha Inicio</th>
+                                            <th>Fecha Fin</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%
+                                            try {
+                                                Dba db = new Dba(application.getRealPath("Hotel.mdb"));
+                                                db.conectar();
+                                                String sql ="select Nombre,Tipo,Porcentaje,FechaInicio,FechaFin  "
+                                                        + "from CategoriaDescuentoPromocion join Categoria on CategoriaDescuentoPromocion.IdCategoria=Categoria.IdCategoria";
+                                                db.prepare(sql);
+                                                db.query.execute();
+                                                ResultSet rs = db.query.getResultSet();
+                                                while (rs.next()) {
+
+                                        %>
+                                        <tr > 
+                                            <td><%=rs.getString(1)%></td> 
+                                            <%if(rs.getInt(2)==0){%>
+                                            <td>Promoción</td> 
+                                            <%}else{%>
+                                             <td>Descuento</td> 
+                                            <%}%>
+                                             <td><%=rs.getString(3)%></td>
+                                            <td><%=rs.getString(4)%></td>
+                                            <td><%=rs.getString(5)%></td>
+                                            
+                                        </tr>         
+                                                
+                                        <%
+                                                }
+                                                db.desconectar();
+                                            } catch (Exception e) {
+                                                
+                                            }
+                                        %> 
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

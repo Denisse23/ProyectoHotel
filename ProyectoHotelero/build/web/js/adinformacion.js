@@ -9,6 +9,7 @@ $(function () {
     $("#div-modificar-categoria").hide();
     
     $("#div-nuevo-habitacion").hide();
+     $("#div-nuevo-promocion").hide();
     
     $("#button-nuevo-activo").click(function () {
         $("#div-nuevo-activo").show();
@@ -25,6 +26,9 @@ $(function () {
     
     $("#button-nuevo-habitacion").click(function () {
         $("#div-nuevo-habitacion").show();
+    });
+     $("#button-nuevo-promocion").click(function () {
+        $("#div-nuevo-promocion").show();
     });
 
     $("#button-agregar-activo").click(function () {
@@ -221,9 +225,55 @@ $(function () {
             $('#form-nuevo-habitacion').submit();
         }
     });
+    
+    $("#button-agregar-promocion").click(function () {
+        $("#span-porcentaje-agregar-promocion").text("");
+        $("#span-fecha-inicio-promocion").text("");
+        $("#span-fecha-fin-promocion").text("");
+        var cont_errores = 0;
+        if ($("#text-porcentaje-agregar-promocion").val() === "") {
+            $("#span-porcentaje-agregar-promocion").text("El porcentaje no puede ser vacío");
+            cont_errores++;
+        }else if(!isValidPocentaje($("#text-porcentaje-agregar-promocion").val())){
+            $("#span-porcentaje-agregar-promocion").text("El porcentaje está incorrecto");
+            cont_errores++;
+        }
+        if ($("#date-fecha-inicio-promocion").val() === "") {
+            $("#span-fecha-inicio-promocion").text("La fecha de inicio no puede ser vacía");
+            cont_errores++;
+        }
+        if ($("#date-fecha-fin-promocion").val() === "") {
+            $("#span-fecha-fin-promocion").text("La fecha de fin no puede ser vacía");
+            cont_errores++;
+        }
+        if (cont_errores === 0 && !validasFechas()) {
+            cont_errores++;
+        }
+
+        
+        if (cont_errores === 0) {
+            $('#form-nuevo-promocion').submit();
+        }
+    });
 
 });
+function validasFechas() {
+    var ms = Date.parse($("#date-fecha-inicio-promocion").val());
+    var fechalle = new Date(ms);
+    ms = Date.parse($("#date-fecha-fin-promocion").val());
+    var fechasali = new Date(ms);
+    if (fechasali <= fechalle) {
+        $("#span-fecha-inicio-promocion").text("La fecha de inicio es mayor o igual que la fecha fin");
+        return false;
+    }
+    var today = new Date();
+    if (fechalle < today) {
+        $("#span-fecha-inicio-promocion").text("La fecha de inicio no puede ser anterior al día de hoy");
+        return false;
+    }
 
+    return true;
+}
 function isValidEmail(mail){
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(mail);
 }
@@ -237,6 +287,10 @@ function isValidPrecio(precio){
 }
 function isValidId(id){
     return /^[0-9]+$/.test(id);
+}
+
+function isValidPocentaje(porcentaje){
+    return /^(100|([0-9]){2,2}(\.[0-9]{2,2}){0,1})$/.test(porcentaje);
 }
 function modificarActivo(id, nombre, cantidaddis, cantidaduso) {
     $("#div-modificar-activo").show();
