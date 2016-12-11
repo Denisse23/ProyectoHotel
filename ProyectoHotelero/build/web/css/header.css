@@ -79,6 +79,17 @@ a{
     background-color: #2A2F34;
 }
 
+.ubicacion-h{
+    width: 10%;
+    padding-left: 90%;
+    padding-bottom: 1%;
+    font-size: 16px;
+    
+    font-family: 'Open Sans';
+    font-style: inherit;
+    font-weight: 100;
+}
+
 
 
 

@@ -7,7 +7,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="database.Dba"%>
 <div class="line-cafe"></div>
-<div class="line-black"></div>
+<div class="line-black"><a class="ubicacion-h" href="ubicacion.jsp">Ubicación</a></div>
 <header class="Principal_header">
     <%
         try {

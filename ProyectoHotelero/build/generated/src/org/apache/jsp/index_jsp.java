@@ -3,6 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.sql.ResultSet;
+import database.Dba;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -52,19 +54,37 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
 
     if (request.getParameter("user") != null) {
         session.setAttribute("Rol", request.getParameter("user").toString());
-        if(request.getParameter("user").equals("Administrador")){
+        if (request.getParameter("user").equals("Administrador")) {
             session.setAttribute("Id-Usuario", 2);
             session.setAttribute("Usuario", "useradmin");
-        }else{
-            session.setAttribute("Id-Usuario", 3);
-            session.setAttribute("Usuario", "primeruser");
-        }
-    }
-    
+            
+            try {
+                Dba db = new Dba(application.getRealPath("Hotel.mdb"));
+                db.conectar();
+                String sql = "select Last(IdCaja) from Caja";
+                db.prepare(sql);
+                db.query.execute();
+                ResultSet rs = db.query.getResultSet();
+                while (rs.next()) {
+                    session.setAttribute("idcaja", rs.getInt(1));
+                    
+                    } db.desconectar();
+                      }catch(Exception e){
+                           
+                     }
+
+}else{
+session.setAttribute("Id-Usuario", 3);
+session.setAttribute("Usuario", "primeruser");
+}
+}
+
 
       out.write("\n");
       out.write("<html>\n");
@@ -82,44 +102,46 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("        <div class=\"slides\">\n");
       out.write("            <div id=\"myCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\n");
-      out.write("                 <!-- Wrapper for slides -->\n");
+      out.write("                <!-- Wrapper for slides -->\n");
       out.write("                <div class=\"carousel-inner\" role=\"listbox\">\n");
-      out.write("                    \n");
-      out.write("            ");
+      out.write("\n");
+      out.write("                    ");
 
-                ServletContext context = session.getServletContext();
-                String realContextPath = context.getRealPath(request.getContextPath());
-                File file = new File(realContextPath.substring(0, realContextPath.length() - 17) + "/images/imghotel.txt");
-                FileInputStream fis = new FileInputStream(file);
+                        ServletContext context = session.getServletContext();
+                        String realContextPath = context.getRealPath(request.getContextPath());
+                        File file = new File(realContextPath.substring(0, realContextPath.length() - 17) + "/images/imghotel.txt");
+                        FileInputStream fis = new FileInputStream(file);
 
-                BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+                        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 
-                String line = null;
-                int cont=0;
-                while ((line = br.readLine()) != null) {
-                    if(cont==0){
-                        
+                        String line = null;
+                        int cont = 0;
+                        while ((line = br.readLine()) != null) {
+                            if (cont == 0) {
+
+
                     
-            
       out.write("\n");
-      out.write("                <div class=\"item active\">\n");
-      out.write("                        ");
-      out.print( line);
-      out.write("\n");
-      out.write("                </div>\n");
-      out.write("            ");
-          }else{
-      out.write("\n");
-      out.write("                <div class=\"item\">\n");
+      out.write("                    <div class=\"item active\">\n");
       out.write("                        ");
       out.print( line);
       out.write("\n");
       out.write("                    </div>\n");
-      out.write("                \n");
-      out.write("                ");
- }cont++;} 
+      out.write("                    ");
+          } else {
       out.write("\n");
-      out.write("            </div>\n");
+      out.write("                    <div class=\"item\">\n");
+      out.write("                        ");
+      out.print( line);
+      out.write("\n");
+      out.write("                    </div>\n");
+      out.write("\n");
+      out.write("                    ");
+ }
+                        cont++;
+                    }
+      out.write("\n");
+      out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("        </div>\n");
       out.write("        ");

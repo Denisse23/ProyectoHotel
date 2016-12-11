@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/WebService/existeTarjeta?wsdl" uri="src/conf/xml-resources/web-service-references/existeTarjeta/wsdl/localhost_8080/WebService/existeTarjeta.wsdl"/>
+    <system systemId="http://localhost:8080/WebService/existeTarjeta?xsd=1" uri="src/conf/xml-resources/web-service-references/existeTarjeta/wsdl/localhost_8080/WebService/existeTarjeta.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WebService/debitarMonto?wsdl" uri="src/conf/xml-resources/web-service-references/debitarMonto/wsdl/localhost_8080/WebService/debitarMonto.wsdl"/>
+    <system systemId="http://localhost:8080/WebService/debitarMonto?xsd=1" uri="src/conf/xml-resources/web-service-references/debitarMonto/wsdl/localhost_8080/WebService/debitarMonto.xsd_1.xsd"/>
+</catalog>

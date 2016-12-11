@@ -22,7 +22,7 @@
     <jsp:include page="head.jsp"/>
     <head>
         <link rel="stylesheet" type="text/css" href="./css/reservar.css">
-        <script type="text/javascript" src="<%= application.getContextPath()+"/js/reservar.js"%>"></script
+        <script type="text/javascript" src="<%= application.getContextPath()+"/js/reservar.js"%>"></script>
         <title>Reservaciones</title>
     </head>
     <body>

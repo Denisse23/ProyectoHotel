@@ -81,6 +81,23 @@
                         db.query.setString(3, session.getAttribute("Rol").toString());
                         db.query.executeUpdate();
             }
+             String sql3 ="insert into PagoCliente (IdFichaCliente, Monto, IdCaja) values(?,?,?)";
+            db.prepare(sql3);
+            db.query.setString(1, request.getParameter("text-idfichacliente"));
+            db.query.setString(2, request.getParameter("text-totalpago"));
+            db.query.setString(3, session.getAttribute("idcaja").toString());
+            int contador3 = db.query.executeUpdate();
+             if (contador3 == 1) {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        Date date = new Date();
+                        String sql4 = "insert into Bitacora (Accion, Tabla, Usuario, Fecha, Rol) values('insert','PagoCliente'"
+                                       + ",?,?,?)";
+                        db.prepare(sql4);
+                        db.query.setString(1, session.getAttribute("Usuario").toString());
+                        db.query.setString(2, dateFormat.format(date));
+                        db.query.setString(3, session.getAttribute("Rol").toString());
+                        db.query.executeUpdate();
+            }
             db.commit();
             db.desconectar();
 

@@ -18,7 +18,7 @@
     <head>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="<%= application.getContextPath()+"/css/adinformacion.css"%>">
-        <script type="text/javascript" src="<%= application.getContextPath()+"/js/adinformacion.js"%>"></script
+        <script type="text/javascript" src="<%= application.getContextPath()+"/js/adinformacion.js"%>"></script>
         <title>Administrar Información</title>
     </head>
     <body>
@@ -40,7 +40,7 @@
                                     <form method="POST" id="form-nuevo-activo" action="<%= application.getContextPath()+"/backjsp/agregaractivo.jsp"%>">
                                     <div class="form-group">
                                         <label >Nombre:</label>
-                                        <input id="text-nombre-nuevo-activo" name="text-nombre-nuevo-activo",type="text" class="form-control" ><span id="span-nombre-nuevo-activo"></span>
+                                        <input id="text-nombre-nuevo-activo" name="text-nombre-nuevo-activo" type="text" class="form-control" ><span id="span-nombre-nuevo-activo"></span>
                                         <label >Cantidad Disponible:</label>
                                         <input id="num-cantidad-nuevo-activo" name="num-cantidad-nuevo-activo" type="number" min="1" class="form-control"/><span id="span-cantidad-nuevo-activo"></span>
                                         <br>
@@ -54,13 +54,13 @@
                                     <form method="POST" id="form-modificar-activo" action="<%= application.getContextPath()+"/backjsp/modificaractivo.jsp"%>">
                                     <div class="form-group">
                                         <label >Id Activo:</label>
-                                        <input id="text-id-modificar-activo" name="text-id-modificar-activo",type="text" class="form-control" readonly>
+                                        <input id="text-id-modificar-activo" name="text-id-modificar-activo" type="text" class="form-control" readonly>
                                         <label >Nombre:</label>
-                                        <input id="text-nombre-modificar-activo" name="text-nombre-modificar-activo",type="text" class="form-control" ><span id="span-nombre-modificar-activo"></span>
+                                        <input id="text-nombre-modificar-activo" name="text-nombre-modificar-activo" type="text" class="form-control" ><span id="span-nombre-modificar-activo"></span>
                                         <label >Cantidad Disponible:</label>
                                         <input id="num-cantidad-modificar-activo" name="num-cantidad-modificar-activo" type="number" min="0" class="form-control"/><span id="span-cantidad-modificar-activo"></span>
                                         <label >Cantidad En Uso:</label>
-                                        <input id="text-cantidaduso-modificar-activo" name="text-cantidaduso-modificar-activo",type="text" class="form-control" readonly>
+                                        <input id="text-cantidaduso-modificar-activo" name="text-cantidaduso-modificar-activo" type="text" class="form-control" readonly>
                                         <br>
                                         <input id="button-modificar-activo"  type="button" class="btn btn-primary" value="Modificar" />
                                     </div>
@@ -533,7 +533,7 @@
                                         <label >Ciudad:</label>
                                         <input id="text-ciudad-hotel-informacion" name="text-ciudad-hotel-informacion",type="text" value="<%= rs.getString(7) %>" class="form-control" ><span id="span-ciudad-hotel-informacion"></span>
                                         <label >Ubicación:</label>
-                                        <textarea id="text-ubicacion-hotel-informacion" name="text-ubicacion-hotel-informacion",type="text" class="form-control" ><%= rs.getString(3) %></textarea><span id="span-ubicacion-hotel-informacion"></span>
+                                        <textarea id="text-ubicacion-hotel-informacion" name="text-ubicacion-hotel-informacion",type="text" class="form-control" ><%= rs.getString(8) %></textarea><span id="span-ubicacion-hotel-informacion"></span>
                                         <br>
                                         <input id="button-hotel-informacion"  type="button" class="btn btn-primary" value="Guardar Cambios" />
                                         <% }

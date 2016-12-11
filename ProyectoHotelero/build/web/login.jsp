@@ -14,20 +14,23 @@
      <jsp:include page="head.jsp"/>
     <head>
          <link rel="stylesheet" type="text/css" href="./css/login.css">   
+         <script type="text/javascript" src="<%= application.getContextPath()+"/js/md5.js"%>"></script>
+         <script type="text/javascript" src="<%= application.getContextPath()+"/js/login.js"%>"></script>
         <title>Home</title>
     </head>
    
     <body>
          <jsp:include page="header.jsp"/>
          <div class="login">
-             <form method="POST" action="index.jsp">
+             <form method="POST" action="autenticar.jsp" id="form-login">
                  <div class="form-group">
                      <label >Usuario:</label>
-                     <input type="text" class="form-control" name="user">
+                     <input type="text" class="form-control" id="text-usuario-login" name="text-usuario-login"><span id="span-usuario-login"></span>
                       <label >Password:</label>
-                     <input type="password" class="form-control"  >
+                     <input type="password" class="form-control" id="text-pass-login" name="text-pass-login" ><span id="span-pass-login"></span>
+                     
                      <br>
-                     <input type="submit" class="btn btn-primary" value="Entrar" />
+                     <input type="button" name="button-entrar-login" id="button-entrar-login" class="btn btn-primary" value="Entrar" />
                  </div>
              </form>
          </div>
