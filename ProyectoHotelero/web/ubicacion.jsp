@@ -25,7 +25,7 @@
             <div id="mapa" style="width: 500px; height: 300px; border: 5px groove #006600;"></div>
             <br>
             
-            <input type="button" value="Mi ubicacion" class="btn btn-primary" onclick="mostrar_mapa(1)"/>
+            <input type="button" value="Ubicación Hotel" class="btn btn-primary" onclick="mostrar_mapa(1)"/>
             <input type="button" value="Limpiar ubicacion" class="btn btn-primary" onclick="mostrar_mapa(0)"/>
             <a class="btn btn-primary" role="button" href="https://www.google.com/maps/place/14.075904,-87.199396/">Save</a>
         

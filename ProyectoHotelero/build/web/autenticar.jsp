@@ -21,7 +21,7 @@
                 try {
                     Dba db = new Dba(application.getRealPath("Hotel.mdb"));
                     db.conectar();
-                    String sql = ("select Rol from Usuario where Usuario=? and Password=?");
+                    String sql = ("select IdUsuario, Rol from Usuario where Usuario=? and Password=?");
                     db.prepare(sql);
                     db.query.setString(1, request.getParameter("text-usuario-login"));
                     db.query.setString(2, request.getParameter("text-pass-login"));
@@ -29,8 +29,10 @@
                     db.query.execute();
                     ResultSet rs = db.query.getResultSet();
                     String rol = "";
+                    String Idusuario = "";
                     while (rs.next()) {
-                        rol = rs.getString(1);
+                        rol = rs.getString(2);
+                        Idusuario = rs.getString(1);
                     }
 
                     if (!rol.equals("")) {
@@ -47,6 +49,7 @@
                         }
                         session.setAttribute("Usuario",request.getParameter("text-usuario-login"));
                         session.setAttribute("Rol", rol);
+                        session.setAttribute("Id-Usuario", Idusuario);
                         out.write("<script>window.location.href='" + application.getContextPath() + "/index.jsp';</script>");
                         
                     }else{

@@ -57,35 +57,6 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
-
-    if (request.getParameter("user") != null) {
-        session.setAttribute("Rol", request.getParameter("user").toString());
-        if (request.getParameter("user").equals("Administrador")) {
-            session.setAttribute("Id-Usuario", 2);
-            session.setAttribute("Usuario", "useradmin");
-            
-            try {
-                Dba db = new Dba(application.getRealPath("Hotel.mdb"));
-                db.conectar();
-                String sql = "select Last(IdCaja) from Caja";
-                db.prepare(sql);
-                db.query.execute();
-                ResultSet rs = db.query.getResultSet();
-                while (rs.next()) {
-                    session.setAttribute("idcaja", rs.getInt(1));
-                    
-                    } db.desconectar();
-                      }catch(Exception e){
-                           
-                     }
-
-}else{
-session.setAttribute("Id-Usuario", 3);
-session.setAttribute("Usuario", "primeruser");
-}
-}
-
-
       out.write("\n");
       out.write("<html>\n");
       out.write("    ");

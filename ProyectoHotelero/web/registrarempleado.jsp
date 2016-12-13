@@ -53,7 +53,15 @@
                         db.query.setString(2, dateFormat.format(date));
                         db.query.setString(3, session.getAttribute("Rol").toString());
                         db.query.executeUpdate();
-                         EnviadorMail enviadormail = new EnviadorMail(request.getParameter("text-email-empleado"),"Registro Hotel LQ","Usted se ha registrado en Hotel LQ\n"+"Sus datos son:\n"+"Usuario:"+user+"\nPassword:"+request.getParameter("text-password-sincifrar")+"\nSi usted no ha realizado está acción, por favor ignorar el mensaje.");
+                        String namehotel="";
+                        String sql5 = "select Nombre from Informacion";
+                        db.prepare(sql5);
+                        db.query.execute();
+                        ResultSet rs5 = db.query.getResultSet();
+                        while(rs5.next()){
+                            namehotel = rs5.getString(1);
+                        }
+                         EnviadorMail enviadormail = new EnviadorMail(request.getParameter("text-email-empleado"),"Registro "+namehotel,"Usted se ha registrado en "+namehotel+"\n"+"Sus datos son:\n"+"Usuario:"+user+"\nPassword:"+request.getParameter("text-password-sincifrar")+"\nSi usted no ha realizado está acción, por favor ignorar el mensaje.");
                     }
                     String sql = "insert into Empleado (PrimerNombre,SegundoNombre,PrimerApellido,SegundoApellido,Email,"
                             + " IdUsuario) values"
